@@ -1,0 +1,30 @@
+@if (!selectedForm) {
+  <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    @for (card of cards; track card.id) {
+      <div class="bg-white rounded-xl shadow border p-6 flex flex-col items-center justify-between">
+        <h3 class="text-xl font-semibold text-gray-800 tracking-wide mb-2">{{ card.title }}</h3>
+        <p class="text-gray-600 text-center text-sm mb-4">
+          {{ card.description }}
+        </p>
+        <div class="flex gap-4 mt-auto">
+          <button
+            class="bg-orange-600 text-white px-5 py-2 rounded-lg hover:bg-orange-700 transition duration-200 shadow-sm"
+            (click)="selecionarFormulario(card.id)">
+            VER
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+}
+
+@if (selectedForm) {
+  <div>
+    <button class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded mb-4" (click)="selectedForm = null">
+      ← Voltar
+    </button>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+      <formly-form [form]="form" [model]="model" [fields]="currentFields"></formly-form>
+    </form>
+  </div>
+}

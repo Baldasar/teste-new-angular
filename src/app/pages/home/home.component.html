@@ -1,0 +1,32 @@
+<div class="h-screen grid grid-rows-[10%_90%] bg-gray-50 font-sans">
+  <header class="bg-white shadow relative h-full">
+    <h1 class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-2xl font-bold text-gray-800">
+      Título Centralizado
+    </h1>
+    <button
+      class="absolute right-6 top-1/2 transform -translate-y-1/2 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded transition"
+      (click)="logout()">
+      Logout
+    </button>
+  </header>
+
+  <div class="grid grid-cols-[16rem_1fr] h-full">
+    <aside class="bg-white border-r p-6 flex flex-col gap-4 shadow-inner">
+      <button class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded transition"
+        (click)="handleComponentChange('order')">
+        Pedidos
+      </button>
+      <button class="bg-green-600 hover:bg-green-700 text-white font-medium py-2 rounded transition"
+        (click)="handleComponentChange('form')">
+        Formularios
+      </button>
+    </aside>
+
+    <main class="bg-white p-10 overflow-auto shadow-inner flex flex-col h-full">
+      <ng-container [ngSwitch]="currentComponent">
+        <app-order *ngSwitchCase="'order'"></app-order>
+        <app-form *ngSwitchCase="'form'"></app-form>
+      </ng-container>
+    </main>
+  </div>
+</div>
